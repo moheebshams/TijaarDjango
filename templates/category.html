@@ -1,0 +1,48 @@
+<section class="w-full px-4 md:px-7 mt-16 mb-10">
+  <div class="max-w-6xl mx-auto">
+    <!-- Heading -->
+    <div class="text-center mb-10">
+      <h2 class="text-3xl md:text-4xl font-bold text-headings font-heading mb-4">
+        Shop by Category
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Discover our wide range of household essentials for every room in your home
+      </p>
+    </div>
+
+    <!-- Categories Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 md:gap-6">
+{% for category in categories %}
+      <a href="{% url 'products' %}" class="block">
+        <article
+          class="group bg-white rounded-xl p-5 text-center hover:shadow-md cursor-pointer transition duration-300"
+        >
+          <div
+            class="w-16 h-16 mx-auto bg-background rounded-full flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors duration-300"
+          >
+            <i
+              class="fas {{ category.icon }} text-primary text-2xl group-hover:scale-110 transition-transform duration-300"
+            ></i>
+          </div>
+          <h3 class="text-headings font-medium text-sm md:text-base">
+            {{ category.name }}
+          </h3>
+          <span class="text-xs text-gray-500 mt-1 block">
+            {{ category.products }} Products
+          </span>
+        </article>
+      </a>
+      {% endfor %}
+    </div>
+
+    <!-- View All Button -->
+    <div class="text-center mt-12">
+      <a href="{% url 'categories' %}"  
+        class="inline-flex items-center text-primary border border-primary px-8 py-3 rounded-full font-semibold hover:bg-primary hover:text-white transition"
+      >
+        <span>View All Categories</span>
+        <i class="fas fa-chevron-up ml-2"></i>
+      </a>
+    </div>
+  </div>
+</section>

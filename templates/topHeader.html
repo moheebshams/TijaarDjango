@@ -1,0 +1,42 @@
+    <header
+      class="hidden md:flex items-center justify-between w-full h-[42px] bg-secondary px-4 md:px-7"
+    >
+      <p class="text-headings text-sm">
+        Welcome to Tijaar - Trust of Every Home
+      </p>
+
+      <div class="flex gap-3 md:gap-6 text-xs md:text-sm">
+        <a href ="#"
+          class="flex items-center gap-2 pr-4 border-r border-primary hover:text-primary transition-colors group"
+        >
+          <i
+            class="fas fa-map-marker-alt text-primary group-hover:scale-110 transition-transform"
+          ></i>
+          <p class="text-headings group-hover:text-primary transition-colors">
+            Deliver to <span class="font-semibold">423651</span>
+          </p>
+        </a>
+
+        <a href ="{% url 'trackYourOrder' %}"
+          class="flex items-center gap-2 pr-4 border-r border-primary hover:text-primary transition-colors group"
+        >
+          <i
+            class="fas fa-shopping-cart text-primary group-hover:scale-110 transition-transform"
+          ></i>
+          <p class="text-headings group-hover:text-primary transition-colors">
+            Track your order
+          </p>
+        </a>
+
+        <a href ="#"
+          class="flex items-center gap-2 hover:text-primary transition-colors group"
+        >
+          <i
+            class="fas fa-percent text-primary group-hover:scale-110 transition-transform"
+          ></i>
+          <p class="text-headings group-hover:text-primary transition-colors">
+            All Offers
+          </p>
+        </a>
+      </div>
+    </header>

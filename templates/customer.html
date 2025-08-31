@@ -1,0 +1,69 @@
+{% load static %}
+<section class="w-full px-4 md:px-7 mt-16 mb-16">
+  <div class="max-w-6xl mx-auto">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-headings font-heading mb-4">
+        Our Happy Customers
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        See what people are saying about Tijaar
+      </p>
+      <div class="w-20 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
+    </div>
+
+    <!-- Testimonials Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {% for i in "123" %}
+      <div class="bg-white rounded-2xl p-6 h-72 flex flex-col justify-between relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+        <!-- Decorative corner element -->
+        <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full"></div>
+        
+        <!-- Quote icon -->
+        <div class="absolute top-6 right-6 text-primary/20 text-4xl">
+          <i class="fas fa-quote-right"></i>
+        </div>
+        
+        <div class="flex items-center">
+          <div class="w-14 h-14 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center text-white font-bold text-lg">
+            {{ forloop.counter }}
+          </div>
+          <div class="ml-4">
+            <h4 class="font-semibold text-lg text-gray-800">Customer Name</h4>
+            <p class="text-gray-500 text-sm">City, Country</p>
+          </div>
+        </div>
+        
+        <p class="text-gray-600 mt-4 relative z-10">
+          "This is a placeholder review for layout preview. The product quality exceeded my expectations and delivery was prompt."
+        </p>
+        
+        <div class="flex items-center justify-between mt-4">
+          <div class="flex text-yellow-400">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <span class="text-xs text-gray-400">2 days ago</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Stats Section -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
+      {% for i in "1234" %}
+      <div class="bg-white rounded-xl p-6 text-center shadow-sm hover:shadow-md transition-shadow duration-300 group">
+        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+          {{ forloop.counter }}
+        </div>
+        <div class="text-3xl font-bold text-primary mb-1">10K+</div>
+        <p class="text-gray-600 font-medium">Happy Customers</p>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
