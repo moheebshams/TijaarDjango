@@ -1,6 +1,6 @@
 {% load static %}
 <header
-  class="sticky top-0 z-[222] flex items-center justify-between w-[100%] h-[70px] md:h-[90px] px-4 md:px-7 bg-white relative border-b border-secondary"
+  class="sticky top-0 z-[222] flex items-center justify-between w-[100%] h-[70px] px-4 md:px-7 bg-white relative border-b border-gray"
 >
   <div class="flex items-center gap-4">
     <!-- Hamburger Button -->
@@ -14,14 +14,14 @@
     <!-- Logo -->
      <a href="{% url "home" %}" >
     <div class="flex items-center gap-2 flex-shrink-0">
-      <img src="{% static "images/logo.png" %}" alt="Tijaar Logo"
-      class="w-[100px] h-[40px]" />
+      <img src="{% static "images/urdu.png" %}" alt="Tijaar Logo"
+      class="w-[70px]" />
     </div>
 </a>
     <!-- Search (Desktop only) -->
     <div class="flex-grow max-w-[500px]">
       <div
-        class="hidden md:flex items-center border border-secondary rounded-md px-3 py-2 w-full max-w-[507px] bg-white"
+        class="hidden md:flex items-center border border-secondary rounded-full px-3 py-2 w-full max-w-[507px] bg-white"
       >
         <i class="fas fa-search text-primary mr-2"></i>
         <input
@@ -29,7 +29,6 @@
           placeholder="Search household essentials, groceries and more..."
           class="flex-grow outline-none bg-white text-sm placeholder-gray-500"
         />
-        <i class="fas fa-filter text-primary ml-2"></i>
       </div>
     </div>
 

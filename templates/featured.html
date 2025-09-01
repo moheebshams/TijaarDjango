@@ -15,10 +15,10 @@
     </div>
 
     <!-- Featured Products Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-5">
+    <div class=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-5">
       {% for product in featured_products %}
       <div
-        class="bg-white rounded-2xl overflow-hidden transition-all duration-300 group"
+        class="bg-white shadow-md rounded-2xl overflow-hidden transition-all duration-300 group"
       >
         <!-- Product Image -->
         <div
@@ -52,7 +52,7 @@
         </div>
 
         <!-- Product Info -->
-        <div class="p-5 border-t border-gray-100">
+        <div class="p-5">
           <div class="flex justify-between items-start mb-2">
             <h3 class="font-semibold text-headings text-lg leading-tight">
               {{ product.name }}

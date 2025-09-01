@@ -1,74 +1,78 @@
 {% load static %}
-<section class="relative w-full mt-2">
-  <div class="container mx-auto px-4">
-    <!-- Slider Container -->
-    <div class="relative bg-white overflow-hidden rounded-xl h-96">
-      
-      <!-- Slides -->
+<section class="relative w-full overflow-hidden">
+  <div class="relative bg-white h-[500px]">
+    <!-- Slider Track -->
+    <div id="sliderTrack" class="flex transition-transform duration-500 ease-out">
       {% for slide in slides %}
-      <div class="slide absolute inset-0 transition-opacity duration-700 ease-in-out {% if forloop.first %}opacity-100{% else %}opacity-0{% endif %}">
-        <img src="{% static slide.image %}" alt="{{forloop.counter}}" class="w-full h-full object-contain" />
+      <div class="w-full flex-shrink-0">
+        <img
+          src="{% static slide.image %}"
+          alt="{{ forloop.counter }}"
+          class="w-[100%] h-[500px] object-fit"
+        />
       </div>
       {% endfor %}
-      
-      <!-- Navigation Arrows -->
-      <button class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-md transition-all z-10">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      
-      <button class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-md transition-all z-10">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-      
-      <!-- Indicators -->
-      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
-        {% for slide in slides %}
-        <button class="dot w-3 h-3 rounded-full {% if forloop.first %}bg-white/80{% else %}bg-white/30{% endif %} hover:bg-white transition-all"></button>
-        {% endfor %}
-      </div>
+    </div>
+
+    <!-- Indicators -->
+    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+      {% for slide in slides %}
+      <button
+        class="dot w-3 h-3 rounded-full {% if forloop.first %}bg-white/80{% else %}bg-white/30{% endif %} hover:bg-white transition-all"
+        data-index="{{ forloop.counter0 }}"
+      ></button>
+      {% endfor %}
     </div>
   </div>
 </section>
 
-
-
-
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-  const slides = document.querySelectorAll('.slide');
+  // DOM elements
+  const track = document.getElementById('sliderTrack');
   const dots = document.querySelectorAll('.dot');
-  const prevButton = document.querySelector('.left-4');
-  const nextButton = document.querySelector('.right-4');
-  let currentSlide = 0;
   
-  function showSlide(n) {
-    slides.forEach(slide => slide.style.opacity = 0);
-    dots.forEach(dot => dot.classList.replace('bg-white/80', 'bg-white/30'));
-    
-    currentSlide = (n + slides.length) % slides.length;
-    
-    slides[currentSlide].style.opacity = 1;
-    dots[currentSlide].classList.replace('bg-white/30', 'bg-white/80');
-  }
-  
-  function nextSlide() {
-    showSlide(currentSlide + 1);
-  }
-  
-  function prevSlide() {
-    showSlide(currentSlide - 1);
-  }
-  
-  // Event listeners
-  nextButton.addEventListener('click', nextSlide);
-  prevButton.addEventListener('click', prevSlide);
-  
-  dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => showSlide(index));
-  });
-  
-  // Auto-play
-  setInterval(nextSlide, 5000);
-});
+  // Configuration
+  const totalSlides = dots.length;
+  const slideInterval = 4000;
+  let currentIndex = 0;
+  let autoSlideTimer;
 
+  // Function to update slide position
+  function updateSlide() {
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    
+    // Update active dot
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('bg-white/80', i === currentIndex);
+      dot.classList.toggle('bg-white/30', i !== currentIndex);
+    });
+  }
+
+  // Function to navigate to a specific slide
+  function goToSlide(index) {
+    currentIndex = (index + totalSlides) % totalSlides;
+    updateSlide();
+    resetAutoSlide();
+  }
+
+  // Function to navigate to next slide
+  function nextSlide() {
+    goToSlide(currentIndex + 1);
+  }
+
+  // Function to reset auto slide timer
+  function resetAutoSlide() {
+    clearInterval(autoSlideTimer);
+    autoSlideTimer = setInterval(nextSlide, slideInterval);
+  }
+
+  // Event listeners for dots
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      goToSlide(parseInt(dot.dataset.index));
+    });
+  });
+
+  // Initialize auto slide
+  resetAutoSlide();
 </script>

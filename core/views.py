@@ -5,9 +5,6 @@ SLIDES = [
     {'image': 'images/slider/slide1.png'},
     {'image': 'images/slider/slide2.png'},
     {'image': 'images/slider/slide3.png'},
-    {'image': 'images/slider/slide2.png'},
-    {'image': 'images/slider/slide3.png'},
-    {'image': 'images/slider/slide1.png'},
 ]
 
 # Single source for all categories
