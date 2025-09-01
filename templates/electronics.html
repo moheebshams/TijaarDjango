@@ -1,5 +1,6 @@
 {% load static %}
 
+<!-- Electronics Section -->
 <section class="w-full px-4 md:px-7 mt-16 mb-12">
   <div class="max-w-6xl mx-auto">
     <!-- Section Header -->
@@ -16,14 +17,16 @@
 
     <!-- Electronics Products Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {% for product in '111' %}
+      {% for product in electronics_products %}
       <div class="bg-white rounded-xl overflow-hidden group flex flex-col h-full">
         <!-- Product Image -->
         <a href="{% url 'productDetail' %}">
           <div class="relative h-64 bg-gradient-to-b from-primary/50 to-white flex items-center justify-center p-6">
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="max-h-44 group-hover:scale-105 transition-transform duration-500" />
+            <img src="{% static product.image %}" alt="{{ product.name }}" class="max-h-44 group-hover:scale-105 transition-transform duration-500" />
             {% if product.badge %}
-            <div class="absolute top-4 left-4 bg-blue-100 text-primary text-xs font-bold px-3 py-1.5 rounded-full">
+             <div
+            class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md"
+          >
               {{ product.badge }}
             </div>
             {% endif %}
@@ -34,7 +37,7 @@
         <div class="p-6 flex-grow flex flex-col">
           <h3 class="font-semibold text-headings text-xl mb-2">{{ product.name }}</h3>
           <p class="text-gray-600 text-sm mb-4 flex-grow">
-            {{ product.description|default:"Premium electronics with cutting-edge technology and sleek design."|truncatechars:100 }}
+            {{ product.description|truncatechars:100 }}
           </p>
 
           <!-- Ratings -->

@@ -1,5 +1,15 @@
 from django.shortcuts import render
 
+# Hero slider
+SLIDES = [
+    {'image': 'images/slider/slide1.png'},
+    {'image': 'images/slider/slide2.png'},
+    {'image': 'images/slider/slide3.png'},
+    {'image': 'images/slider/slide2.png'},
+    {'image': 'images/slider/slide3.png'},
+    {'image': 'images/slider/slide1.png'},
+]
+
 # Single source for all categories
 CATEGORIES = [
     {'name': 'Kitchen', 'icon': 'fa-utensils', 'products': 42},
@@ -24,11 +34,121 @@ CATEGORIES = [
     {'name': 'Smart Home', 'icon': 'fa-house-signal', 'products': 29},
 ]
 
-# Views
+# Featured Products
+FEATURED_PRODUCTS = [
+    {
+        'name': 'Modern Lamp',
+        'image': 'images/featured/lamp.png',
+        'price': '$49',
+        'old_price': '$69',
+        'discount': 30,
+        'badge': 'New',
+        'rating': 4,
+        'reviews_count': 12
+    },
+    {
+        'name': 'Wooden Chair',
+        'image': 'images/featured/chair.png',
+        'price': '$89',
+        'old_price': '$120',
+        'discount': 25,
+        'badge': 'Hot',
+        'rating': 5,
+        'reviews_count': 34
+    },
+    {
+        'name': 'Comfort Sofa',
+        'image': 'images/featured/sofa.png',
+        'price': '$299',
+        'old_price': '$350',
+        'discount': 15,
+        'badge': 'Sale',
+        'rating': 4,
+        'reviews_count': 18
+    },
+    {
+        'name': 'Kitchen Mixer',
+        'image': 'images/featured/mixer.png',
+        'price': '$59',
+        'old_price': None,
+        'discount': None,
+        'badge': None,
+        'rating': 3,
+        'reviews_count': 5
+    },
+]
+
+# Electronics Products
+ELECTRONICS_PRODUCTS = [
+    {
+        'name': 'Gaming Console',
+        'image': 'images/electronics/console.png', 
+        'price': '$499',
+        'old_price': '$549',
+        'badge': 'New',
+        'rating': 5,
+        'reviews_count': 85,
+        'description': 'Next-gen gaming console with stunning graphics and ultra-fast performance.'
+    },
+    {
+        'name': 'Smart Watch',
+        'image': 'images/electronics/watch.png',
+        'price': '$199',
+        'old_price': '$249',
+        'badge': 'Hot',
+        'rating': 4,
+        'reviews_count': 40,
+        'description': 'Track your fitness, notifications, and more with this stylish smart watch.'
+    },
+    {
+        'name': 'Smart TV',
+        'image': 'images/electronics/tv.png',
+        'price': '$799',
+        'old_price': '$899',
+        'badge': 'Sale',
+        'rating': 5,
+        'reviews_count': 60,
+        'description': '55-inch 4K Smart TV with HDR, streaming apps, and voice control.'
+    },
+]
+
+# Home Decor Products
+HOME_DECOR_PRODUCTS = [
+    {
+        'name': 'Decorative Vase',
+        'image': 'images/decor/vases.png',
+        'price': '$49',
+        'old_price': '$69',
+        'badge': 'New',
+        'rating': 4,
+        'reviews_count': 25,
+        'description': 'Elegant decorative vase to enhance your living space.'
+    },
+    {
+        'name': 'Wall Art Frame',
+        'image': 'images/decor/art.png',
+        'price': '$89',
+        'old_price': '$109',
+        'badge': 'Hot',
+        'rating': 5,
+        'reviews_count': 32,
+        'description': 'Modern wall art frame to transform your room ambiance.'
+    },
+]
+
 def home(request):
-    return render(request, 'index.html', {'categories': CATEGORIES[:10]})  # first 10 only
+    return render(request, 'index.html', {
+        'slides': SLIDES,
+        'categories': CATEGORIES[:10],   # first 10 only
+                'featured_products': FEATURED_PRODUCTS,
+                        'electronics_products': ELECTRONICS_PRODUCTS,
+                                'home_decor_products': HOME_DECOR_PRODUCTS
+
+
+        })
 
 def category(request):
+    
     return render(request, 'category.html', {'categories': CATEGORIES[:10]})  # first 10 only
 
 def categories(request):
@@ -49,3 +169,4 @@ def form(request): return render(request, 'form.html')
 def trackYourOrder(request): return render(request, 'trackYourOrder.html')
 def products(request): return render(request, 'products.html')
 def productDetail(request): return render(request, 'productDetail.html')
+def wishlist(request): return render(request, 'wishlist.html')

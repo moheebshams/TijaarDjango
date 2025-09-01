@@ -5,7 +5,7 @@
     <div class="relative bg-white overflow-hidden rounded-xl h-96">
       
       <!-- Slides -->
-      {% for i in '11111' %}
+      {% for slide in slides %}
       <div class="slide absolute inset-0 transition-opacity duration-700 ease-in-out {% if forloop.first %}opacity-100{% else %}opacity-0{% endif %}">
         <img src="{% static slide.image %}" alt="{{forloop.counter}}" class="w-full h-full object-contain" />
       </div>
@@ -68,7 +68,7 @@
   });
   
   // Auto-play
-  setInterval(nextSlide, 2000);
+  setInterval(nextSlide, 5000);
 });
 
 </script>
