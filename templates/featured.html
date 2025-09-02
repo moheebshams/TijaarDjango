@@ -26,7 +26,7 @@
         >
           <a href="{% url 'productDetail' %}">
             <img
-              src="{% static product.image %}"
+              src="{{ product.image.url }}" alt="{{ product.name }}"
               alt="{{ product.name }}"
               class="max-h-44 transform group-hover:scale-110 transition-transform duration-500"
             />

@@ -32,7 +32,7 @@
         <div class="flex items-center">
           <div class="w-14 h-14 rounded-full overflow-hidden">
             <img
-              src="{% static customer.image %}"
+              src="{{ customer.image.url }}"
               alt="{{ customer.name }}"
               class="w-full h-full object-cover"
             />
@@ -51,13 +51,15 @@
         <!-- Rating & Time -->
         <div class="flex items-center justify-between mt-4">
           <div class="flex text-yellow-400">
-            {% for s in customer.stars %} {% if s == 1 %}
-            <i class="fas fa-star"></i>
-            {% elif s == 0.5 %}
-            <i class="fas fa-star-half-alt"></i>
-            {% else %}
-            <i class="far fa-star"></i>
-            {% endif %} {% endfor %}
+            {% for s in customer.stars %}
+              {% if s == 1 %}
+                <i class="fas fa-star"></i>
+              {% elif s == 0.5 %}
+                <i class="fas fa-star-half-alt"></i>
+              {% else %}
+                <i class="far fa-star"></i>
+              {% endif %}
+            {% endfor %}
           </div>
           <span class="text-xs text-gray-400">{{ customer.time }}</span>
         </div>
@@ -65,7 +67,7 @@
       {% endfor %}
     </div>
 
-    <!-- Compact Stats Banner (Icon-only hover) -->
+    <!-- Compact Stats Banner -->
     <div class="bg-primary mt-12 py-6 rounded-2xl">
       <div
         class="max-w-6xl mx-auto flex flex-col md:flex-row justify-around items-center text-white gap-4"

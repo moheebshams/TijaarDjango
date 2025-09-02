@@ -16,14 +16,14 @@
 
     <!-- Home Decor Products -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {% for product in home_decor_products %}
+      {% for product in home_decor_product %}
       <div class="bg-white shadow-md rounded-2xl overflow-hidden transition-all duration-300 group">
         <div class="flex flex-col md:flex-row">
           <!-- Product Image -->
           <div class="md:w-2/5 relative">
             <a href="{% url 'productDetail' %}">
               <div class="h-64 md:h-full bg-gradient-to-tr from-background to-background-200 flex items-center justify-center p-6">
-                <img src="{% static product.image %}" alt="{{ product.name }}" class="max-h-44 group-hover:scale-110 transition-transform duration-500" />
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="max-h-44 group-hover:scale-110 transition-transform duration-500" />
                 {% if product.badge %}
                  <div
             class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md"

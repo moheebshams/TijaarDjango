@@ -6,9 +6,9 @@
       {% for slide in slides %}
       <div class="w-full flex-shrink-0">
         <img
-          src="{% static slide.image %}"
-          alt="{{ forloop.counter }}"
-          class="w-[100%] h-[100vh] object-fit"
+          src="{{ slide.image.url }}"
+          alt="{{ slide.title }}"
+          class="w-[100%] h-[100vh] object-cover"
         />
       </div>
       {% endfor %}
@@ -27,52 +27,38 @@
 </section>
 
 <script>
-  // DOM elements
   const track = document.getElementById('sliderTrack');
   const dots = document.querySelectorAll('.dot');
-  
-  // Configuration
   const totalSlides = dots.length;
-  const slideInterval = 4000;
   let currentIndex = 0;
   let autoSlideTimer;
 
-  // Function to update slide position
   function updateSlide() {
     track.style.transform = `translateX(-${currentIndex * 100}%)`;
-    
-    // Update active dot
     dots.forEach((dot, i) => {
       dot.classList.toggle('bg-white/80', i === currentIndex);
       dot.classList.toggle('bg-white/30', i !== currentIndex);
     });
   }
 
-  // Function to navigate to a specific slide
   function goToSlide(index) {
     currentIndex = (index + totalSlides) % totalSlides;
     updateSlide();
     resetAutoSlide();
   }
 
-  // Function to navigate to next slide
   function nextSlide() {
     goToSlide(currentIndex + 1);
   }
 
-  // Function to reset auto slide timer
   function resetAutoSlide() {
     clearInterval(autoSlideTimer);
-    autoSlideTimer = setInterval(nextSlide, slideInterval);
+    autoSlideTimer = setInterval(nextSlide, 4000);
   }
 
-  // Event listeners for dots
   dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      goToSlide(parseInt(dot.dataset.index));
-    });
+    dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.index)));
   });
 
-  // Initialize auto slide
   resetAutoSlide();
 </script>

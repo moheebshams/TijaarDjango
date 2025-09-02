@@ -1,225 +1,31 @@
 from django.shortcuts import render
-
-# Hero slider
-SLIDES = [
-    {'image': 'images/slider/slide1.png'},
-    {'image': 'images/slider/slide2.png'},
-    {'image': 'images/slider/slide3.png'},
-]
-
-# Single source for all categories
-CATEGORIES = [
-    {'name': 'Kitchen', 'icon': 'fa-utensils', 'products': 42},
-    {'name': 'Bedroom', 'icon': 'fa-bed', 'products': 28},
-    {'name': 'Bathroom', 'icon': 'fa-bath', 'products': 35},
-    {'name': 'Living Room', 'icon': 'fa-couch', 'products': 56},
-    {'name': 'Garden', 'icon': 'fa-leaf', 'products': 24},
-    {'name': 'Office', 'icon': 'fa-laptop', 'products': 19},
-    {'name': 'Cleaning', 'icon': 'fa-broom', 'products': 31},
-    {'name': 'Storage', 'icon': 'fa-box', 'products': 27},
-    {'name': 'Decor', 'icon': 'fa-paint-brush', 'products': 48},
-    {'name': 'Lighting', 'icon': 'fa-lightbulb', 'products': 22},
-    {'name': 'Laundry', 'icon': 'fa-soap', 'products': 18},
-    {'name': 'Dining', 'icon': 'fa-utensil-spoon', 'products': 33},
-    {'name': 'Kids Room', 'icon': 'fa-child', 'products': 25},
-    {'name': 'Pets', 'icon': 'fa-paw', 'products': 15},
-    {'name': 'Garage', 'icon': 'fa-warehouse', 'products': 20},
-    {'name': 'Balcony', 'icon': 'fa-chair', 'products': 12},
-    {'name': 'Home Gym', 'icon': 'fa-dumbbell', 'products': 17},
-    {'name': 'Entryway', 'icon': 'fa-door-open', 'products': 14},
-    {'name': 'Outdoor Furniture', 'icon': 'fa-campground', 'products': 21},
-    {'name': 'Smart Home', 'icon': 'fa-house-signal', 'products': 29},
-]
-
-# Featured Products
-FEATURED_PRODUCTS = [
-    {
-        'name': 'Modern Lamp',
-        'image': 'images/featured/lamp.png',
-        'price': '$49',
-        'old_price': '$69',
-        'discount': 30,
-        'badge': 'New',
-        'rating': 4,
-        'reviews_count': 12
-    },
-    {
-        'name': 'Wooden Chair',
-        'image': 'images/featured/chair.png',
-        'price': '$89',
-        'old_price': '$120',
-        'discount': 25,
-        'badge': 'Hot',
-        'rating': 5,
-        'reviews_count': 34
-    },
-    {
-        'name': 'Comfort Sofa',
-        'image': 'images/featured/sofa.png',
-        'price': '$299',
-        'old_price': '$350',
-        'discount': 15,
-        'badge': 'Sale',
-        'rating': 4,
-        'reviews_count': 18
-    },
-    {
-        'name': 'Kitchen Mixer',
-        'image': 'images/featured/mixer.png',
-        'price': '$59',
-        'old_price': None,
-        'discount': None,
-        'badge': None,
-        'rating': 3,
-        'reviews_count': 5
-    },
-]
-
-# Electronics Products
-ELECTRONICS_PRODUCTS = [
-    {
-        'name': 'Gaming Console',
-        'image': 'images/electronics/console.png', 
-        'price': '$499',
-        'old_price': '$549',
-        'badge': 'New',
-        'rating': 5,
-        'reviews_count': 85,
-        'description': 'Next-gen gaming console with stunning graphics and ultra-fast performance.'
-    },
-    {
-        'name': 'Smart Watch',
-        'image': 'images/electronics/watch.png',
-        'price': '$199',
-        'old_price': '$249',
-        'badge': 'Hot',
-        'rating': 4,
-        'reviews_count': 40,
-        'description': 'Track your fitness, notifications, and more with this stylish smart watch.'
-    },
-    {
-        'name': 'Smart TV',
-        'image': 'images/electronics/tv.png',
-        'price': '$799',
-        'old_price': '$899',
-        'badge': 'Sale',
-        'rating': 5,
-        'reviews_count': 60,
-        'description': '55-inch 4K Smart TV with HDR, streaming apps, and voice control.'
-    },
-]
-
-# Home Decor Products
-HOME_DECOR_PRODUCTS = [
-    {
-        'name': 'Decorative Vase',
-        'image': 'images/decor/vases.png',
-        'price': '$49',
-        'old_price': '$69',
-        'badge': 'New',
-        'rating': 4,
-        'reviews_count': 25,
-        'description': 'Elegant decorative vase to enhance your living space.'
-    },
-    {
-        'name': 'Wall Art Frame',
-        'image': 'images/decor/art.png',
-        'price': '$89',
-        'old_price': '$109',
-        'badge': 'Hot',
-        'rating': 5,
-        'reviews_count': 32,
-        'description': 'Modern wall art frame to transform your room ambiance.'
-    },
-]
-
-# Customer
-CUSTOMERS = [
-    {
-        'name': 'Fahad Pervaiz',
-        'city': 'Karachi, Pakistan',
-        'review': 'Excellent service! Highly recommend Tijaar for quality products.',
-        'rating': 5,
-        'time': '2 days ago',
-        'stars': [1, 1, 1, 1, 1],
-        'image': 'images/customers/fahad.jpg'
-    },
-    {
-        'name': 'Mahnoor Majeed',
-        'city': 'Lahore, Pakistan',
-        'review': 'Fast delivery and great product quality. Very satisfied!',
-        'rating': 4.5,
-        'time': '1 week ago',
-        'stars': [1, 1, 1, 1, 0.5],
-        'image': 'images/customers/mahnoor.jpg'
-    },
-    {
-        'name': 'Alima Sohail',
-        'city': 'Islamabad, Pakistan',
-        'review': 'Good prices and responsive customer support.',
-        'rating': 4,
-        'time': '3 days ago',
-        'stars': [1, 1, 1, 1, 0],
-        'image': 'images/customers/alima.jpg'
-    },
-]
-
-STATS = [
-    {'icon': 'fa-smile', 'count': '10K+', 'label': 'Happy Customers'},
-    {'icon': 'fa-box', 'count': '5K+', 'label': 'Products Sold'},
-    {'icon': 'fa-thumbs-up', 'count': '2K+', 'label': 'Positive Reviews'},
-    {'icon': 'fa-undo', 'count': '500+', 'label': 'Returning Customers'},
-]
-
-
-# Why
-WHY_FEATURES = [
-    {
-        'icon': 'fa-truck',
-        'title': 'Fast Delivery',
-        'description': 'Get your products delivered quickly and safely.'
-    },
-    {
-        'icon': 'fa-shield-alt',
-        'title': 'Secure Payment',
-        'description': 'Your payments are safe with our advanced encryption.'
-    },
-    {
-        'icon': 'fa-thumbs-up',
-        'title': 'Quality Products',
-        'description': 'We ensure top-notch quality for all our items.'
-    },
-    {
-        'icon': 'fa-headset',
-        'title': '24/7 Support',
-        'description': 'Our customer support team is here for you anytime.'
-    },
-]
+from .models import*
+from django.utils.timezone import now
 
 # Special offer
-OFFER = {
-    "title": "Flash Sale",
-    "sale": "Up to 50% Off",
-    "discount": "Today Only",
-    "description": "Grab the best deals on our top products before the offer ends. Limited stock available!",
-    "days": 2,
-    "hours": 14,
-    "minutes": 35,
-    "seconds": 50,
-    "image": "images/offer.png"
-}
+# OFFER = {
+#     "title": "Flash Sale",
+#     "sale": "Up to 50% Off",
+#     "discount": "Today Only",
+#     "description": "Grab the best deals on our top products before the offer ends. Limited stock available!",
+#     "days": 2,
+#     "hours": 14,
+#     "minutes": 35,
+#     "seconds": 50,
+#     "image": "images/offer.png"
+# }
 
 def home(request):
     return render(request, 'index.html', {
-        'slides': SLIDES,
-        'categories': CATEGORIES[:10],   # first 10 only
-                'featured_products': FEATURED_PRODUCTS,
-                        'electronics_products': ELECTRONICS_PRODUCTS,
-                                'home_decor_products': HOME_DECOR_PRODUCTS,
-                                'customers': CUSTOMERS,
-        'stats': STATS,
-                                        'why_features': WHY_FEATURES,
-                                                'offer': OFFER  # pass the offer dictionary here
+        'slides': Slide.objects.all(),
+        'categories': Category.objects.all(),
+                'featured_products': FeaturedProduct.objects.all(),
+                'electronics_product': ElectronicsProduct.objects.all(),
+                'home_decor_product': HomeDecorProduct.objects.all(),
+                             'customers': Customer.objects.all(),
+        'stats': Stat.objects.all(),
+                                        'features': WhyFeature.objects.all(),
+                                              'offer': Offer.objects.filter(start_time__lte=now()).last(),  
 
 
 
