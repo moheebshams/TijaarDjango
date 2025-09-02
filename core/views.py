@@ -133,13 +133,95 @@ HOME_DECOR_PRODUCTS = [
     },
 ]
 
+# Customer
+CUSTOMERS = [
+    {
+        'name': 'Fahad Pervaiz',
+        'city': 'Karachi, Pakistan',
+        'review': 'Excellent service! Highly recommend Tijaar for quality products.',
+        'rating': 5,
+        'time': '2 days ago',
+        'stars': [1, 1, 1, 1, 1],
+        'image': 'images/customers/fahad.jpg'
+    },
+    {
+        'name': 'Mahnoor Majeed',
+        'city': 'Lahore, Pakistan',
+        'review': 'Fast delivery and great product quality. Very satisfied!',
+        'rating': 4.5,
+        'time': '1 week ago',
+        'stars': [1, 1, 1, 1, 0.5],
+        'image': 'images/customers/mahnoor.jpg'
+    },
+    {
+        'name': 'Alima Sohail',
+        'city': 'Islamabad, Pakistan',
+        'review': 'Good prices and responsive customer support.',
+        'rating': 4,
+        'time': '3 days ago',
+        'stars': [1, 1, 1, 1, 0],
+        'image': 'images/customers/alima.jpg'
+    },
+]
+
+STATS = [
+    {'icon': 'fa-smile', 'count': '10K+', 'label': 'Happy Customers'},
+    {'icon': 'fa-box', 'count': '5K+', 'label': 'Products Sold'},
+    {'icon': 'fa-thumbs-up', 'count': '2K+', 'label': 'Positive Reviews'},
+    {'icon': 'fa-undo', 'count': '500+', 'label': 'Returning Customers'},
+]
+
+
+# Why
+WHY_FEATURES = [
+    {
+        'icon': 'fa-truck',
+        'title': 'Fast Delivery',
+        'description': 'Get your products delivered quickly and safely.'
+    },
+    {
+        'icon': 'fa-shield-alt',
+        'title': 'Secure Payment',
+        'description': 'Your payments are safe with our advanced encryption.'
+    },
+    {
+        'icon': 'fa-thumbs-up',
+        'title': 'Quality Products',
+        'description': 'We ensure top-notch quality for all our items.'
+    },
+    {
+        'icon': 'fa-headset',
+        'title': '24/7 Support',
+        'description': 'Our customer support team is here for you anytime.'
+    },
+]
+
+# Special offer
+OFFER = {
+    "title": "Flash Sale",
+    "sale": "Up to 50% Off",
+    "discount": "Today Only",
+    "description": "Grab the best deals on our top products before the offer ends. Limited stock available!",
+    "days": 2,
+    "hours": 14,
+    "minutes": 35,
+    "seconds": 50,
+    "image": "images/offer.png"
+}
+
 def home(request):
     return render(request, 'index.html', {
         'slides': SLIDES,
         'categories': CATEGORIES[:10],   # first 10 only
                 'featured_products': FEATURED_PRODUCTS,
                         'electronics_products': ELECTRONICS_PRODUCTS,
-                                'home_decor_products': HOME_DECOR_PRODUCTS
+                                'home_decor_products': HOME_DECOR_PRODUCTS,
+                                'customers': CUSTOMERS,
+        'stats': STATS,
+                                        'why_features': WHY_FEATURES,
+                                                'offer': OFFER  # pass the offer dictionary here
+
+
 
 
         })

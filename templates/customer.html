@@ -3,7 +3,7 @@
   <div class="max-w-6xl mx-auto">
     <!-- Section Header -->
     <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-headings font-heading mb-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
         Our Happy Customers
       </h2>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -14,56 +14,76 @@
 
     <!-- Testimonials Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {% for i in "123" %}
-      <div class="bg-white border border-gray-100 rounded-2xl p-6 h-72 flex flex-col justify-between relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+      {% for customer in customers %}
+      <article
+        class="bg-white shadow-md hover:shadow-lg rounded-2xl p-6 h-72 flex flex-col justify-between relative overflow-hidden transition-transform duration-300"
+      >
         <!-- Decorative corner element -->
-        <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full"></div>
-        
+        <div
+          class="absolute top-0 right-0 w-16 h-16 bg-primary/10 rounded-bl-full"
+        ></div>
+
         <!-- Quote icon -->
-        <div class="absolute top-6 right-6 text-primary/20 text-4xl">
+        <div class="absolute top-6 right-6 text-primary/30 text-4xl">
           <i class="fas fa-quote-right"></i>
         </div>
-        
+
+        <!-- User Info with image -->
         <div class="flex items-center">
-          <div class="w-14 h-14 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center text-white font-bold text-lg">
-            {{ forloop.counter }}
+          <div class="w-14 h-14 rounded-full overflow-hidden">
+            <img
+              src="{% static customer.image %}"
+              alt="{{ customer.name }}"
+              class="w-full h-full object-cover"
+            />
           </div>
           <div class="ml-4">
-            <h4 class="font-semibold text-lg text-gray-800">Customer Name</h4>
-            <p class="text-gray-500 text-sm">City, Country</p>
+            <h4 class="font-semibold text-lg text-gray-800">
+              {{ customer.name }}
+            </h4>
+            <p class="text-gray-500 text-sm">{{ customer.city }}</p>
           </div>
         </div>
-        
-        <p class="text-gray-600 mt-4 relative z-10">
-          "This is a placeholder review for layout preview. The product quality exceeded my expectations and delivery was prompt."
-        </p>
-        
+
+        <!-- Review -->
+        <p class="text-gray-600 mt-4 flex-1">"{{ customer.review }}"</p>
+
+        <!-- Rating & Time -->
         <div class="flex items-center justify-between mt-4">
           <div class="flex text-yellow-400">
+            {% for s in customer.stars %} {% if s == 1 %}
             <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
+            {% elif s == 0.5 %}
+            <i class="fas fa-star-half-alt"></i>
+            {% else %}
             <i class="far fa-star"></i>
+            {% endif %} {% endfor %}
           </div>
-          <span class="text-xs text-gray-400">2 days ago</span>
+          <span class="text-xs text-gray-400">{{ customer.time }}</span>
         </div>
-      </div>
+      </article>
       {% endfor %}
     </div>
 
-    <!-- Stats Section -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
-      {% for i in "1234" %}
-      <div class="bg-white border border-gray-100 rounded-xl p-6 text-center shadow-sm hover:shadow-md transition-shadow duration-300 group">
-        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-          {{ forloop.counter }}
+    <!-- Compact Stats Banner (Icon-only hover) -->
+    <div class="bg-primary mt-12 py-6 rounded-2xl">
+      <div
+        class="max-w-6xl mx-auto flex flex-col md:flex-row justify-around items-center text-white gap-4"
+      >
+        {% for stat in stats %}
+        <div class="flex flex-col items-center group">
+          <div
+            class="w-14 h-14 bg-white text-primary rounded-full flex items-center justify-center mb-2 text-xl"
+          >
+            <i
+              class="fas {{ stat.icon }} transition-transform duration-300 group-hover:scale-110"
+            ></i>
+          </div>
+          <div class="text-2xl font-bold">{{ stat.count }}</div>
+          <p class="text-sm font-medium">{{ stat.label }}</p>
         </div>
-        <div class="text-3xl font-bold text-primary mb-1">10K+</div>
-        <p class="text-gray-600 font-medium">Happy Customers</p>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
-
   </div>
 </section>
