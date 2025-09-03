@@ -1,6 +1,6 @@
 {% load static %}
-<section class="relative w-full overflow-hidden">
-  <div class="relative bg-white h-[500px]">
+<section class="relative max-w-[1400px] mx-auto overflow-hidden ">
+  <div class="relative">
     <!-- Slider Track -->
     <div id="sliderTrack" class="flex transition-transform duration-500 ease-out">
       {% for slide in slides %}
@@ -8,7 +8,8 @@
         <img
           src="{{ slide.image.url }}"
           alt="{{ slide.title }}"
-          class="w-[100%] h-[100vh] object-cover"
+          class="w-full 
+                 h-[200px] sm:h-[250px] md:h-[300px] lg:h-[400px] xl:h-[500px] object-cover"
         />
       </div>
       {% endfor %}

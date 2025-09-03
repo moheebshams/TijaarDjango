@@ -2,18 +2,6 @@ from django.shortcuts import render
 from .models import*
 from django.utils.timezone import now
 
-# Special offer
-# OFFER = {
-#     "title": "Flash Sale",
-#     "sale": "Up to 50% Off",
-#     "discount": "Today Only",
-#     "description": "Grab the best deals on our top products before the offer ends. Limited stock available!",
-#     "days": 2,
-#     "hours": 14,
-#     "minutes": 35,
-#     "seconds": 50,
-#     "image": "images/offer.png"
-# }
 
 def home(request):
     return render(request, 'index.html', {

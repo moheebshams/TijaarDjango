@@ -1,8 +1,3 @@
-// Mobile menu toggle
-document.getElementById("mobileMenuButton").onclick = function () {
-  document.getElementById("mobileMenu").classList.toggle("hidden");
-};
-
 // Loader
 window.addEventListener("load", function () {
   setTimeout(function () {

@@ -45,9 +45,12 @@
         
         <!-- Product Image -->
         <div class="relative h-60 bg-gradient-to-b from-primary/30 to-white flex items-center justify-center p-4 overflow-hidden">
+          <a href="{% url "productDetail" %}">
           <div class="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <img src="{% static product.image %}" alt="{{ product.name }}"
-               class="max-h-44 transform group-hover:scale-110 transition-transform duration-500" />
+
+            <img src="{% static product.image %}" alt="{{ product.name }}"
+            class="max-h-44 transform group-hover:scale-110 transition-transform duration-500" />
+          </a>
 
           <!-- Optional Badge -->
           {% if product.badge %}

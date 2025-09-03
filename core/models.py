@@ -1,6 +1,6 @@
 from django.db import models
 
-# Hero Section
+# Desktop slider
 class Slide(models.Model):
     title = models.CharField(max_length=100, blank=True)
     subtitle = models.CharField(max_length=200, blank=True)
