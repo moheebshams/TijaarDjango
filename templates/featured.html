@@ -3,9 +3,7 @@
   <div class="max-w-6xl mx-auto">
     <!-- Section Header -->
     <div class="text-center mb-12">
-      <h2
-        class="text-3xl md:text-4xl font-bold text-headings font-heading mb-3"
-      >
+      <h2 class="text-3xl md:text-4xl font-bold text-headings font-heading mb-3">
         Featured Products
       </h2>
       <p class="text-gray-600 max-w-2xl mx-auto">
@@ -15,39 +13,37 @@
     </div>
 
     <!-- Featured Products Grid -->
-    <div class=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-5">
       {% for product in featured_products %}
-      <div
-        class="bg-white shadow-md rounded-2xl overflow-hidden transition-all duration-300 group"
-      >
+      <div class="bg-white shadow-md rounded-2xl overflow-hidden transition-all duration-300 group">
         <!-- Product Image -->
-        <div
-          class="relative h-60 bg-gradient-to-b from-primary/50 to-white flex items-center justify-center p-4 overflow-hidden"
-        >
+        <div class="relative h-60 bg-gradient-to-b from-primary/50 to-white flex items-center justify-center p-4 overflow-hidden">
           <a href="{% url 'productDetail' %}">
-            <img
-              src="{{ product.image.url }}" alt="{{ product.name }}"
-              alt="{{ product.name }}"
-              class="max-h-44 transform group-hover:scale-110 transition-transform duration-500"
-            />
+            <img src="{{ product.image.url }}" alt="{{ product.name }}"
+                 class="max-h-44 transform group-hover:scale-110 transition-transform duration-500" />
           </a>
 
           <!-- Badge -->
           {% if product.badge %}
-          <div
-            class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md"
-          >
+          <div class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md">
             {{ product.badge }}
           </div>
           {% endif %}
 
-          <!-- Action Buttons -->
+          <!-- Wishlist Button -->
           <div class="absolute top-4 right-4 flex flex-col space-y-2">
-            <button
-              class="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-gray-500 hover:bg-primary hover:text-white transition-colors"
-            >
-              <i class="far fa-heart"></i>
+            {% if user.is_authenticated %}
+            <button class="wishlist-btn w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center
+                    {% if product.id in wishlist_ids %}text-red-500{% else %}text-gray-500{% endif %}"
+                    data-product-id="{{ product.id }}">
+              <i class="{% if product.id in wishlist_ids %}fas fa-heart{% else %}far fa-heart{% endif %}"></i>
             </button>
+            {% else %}
+            <a href="{% url 'form' %}"
+               class="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-gray-500 hover:bg-primary hover:text-white transition-colors">
+              <i class="far fa-heart"></i>
+            </a>
+            {% endif %}
           </div>
         </div>
 
@@ -58,9 +54,7 @@
               {{ product.name }}
             </h3>
             {% if product.discount %}
-            <span
-              class="text-green-600 text-sm font-medium bg-green-100 px-2 py-1 rounded-md ml-2 whitespace-nowrap"
-            >
+            <span class="text-green-600 text-sm font-medium bg-green-100 px-2 py-1 rounded-md ml-2 whitespace-nowrap">
               {{ product.discount }}% off
             </span>
             {% endif %}
@@ -69,36 +63,34 @@
           <!-- Rating -->
           <div class="flex items-center mb-3">
             <div class="flex text-yellow-400 text-sm">
-              {% for i in "12345" %} {% if forloop.counter <= product.rating %}
-              <i class="fas fa-star"></i>
-              {% else %}
-              <i class="far fa-star"></i>
-              {% endif %} {% endfor %}
+              {% for i in "12345" %}
+                {% if forloop.counter <= product.rating %}
+                <i class="fas fa-star"></i>
+                {% else %}
+                <i class="far fa-star"></i>
+                {% endif %}
+              {% endfor %}
             </div>
-            <span class="text-xs text-gray-500 ml-2"
-              >({{ product.reviews_count|default:"0" }})</span
-            >
+            <span class="text-xs text-gray-500 ml-2">
+              ({{ product.reviews_count|default:"0" }})
+            </span>
           </div>
 
           <!-- Price -->
           <div class="flex items-center justify-between mt-4">
             <div class="flex items-center">
-              <span class="text-primary font-bold text-xl"
-                >{{ product.price }}</span
-              >
+              <span class="text-primary font-bold text-xl">${{ product.price }}</span>
               {% if product.old_price %}
-              <span class="text-gray-500 line-through text-sm ml-2"
-                >{{ product.old_price }}</span
-              >
+              <span class="text-gray-500 line-through text-sm ml-2">
+                ${{ product.old_price }}
+              </span>
               {% endif %}
             </div>
 
-            <a
-              href="{% url 'addToCart' %}"
-              class="bg-primary text-white w-11 h-11 rounded-full flex items-center justify-center hover:bg-primary-dark add-to-cart"
-              data-product="{{ product.name }}"
-              data-price="{{ product.price }}"
-            >
+            <a href="{% url 'addToCart' %}"
+               class="bg-primary text-white w-11 h-11 rounded-full flex items-center justify-center hover:bg-primary-dark add-to-cart"
+               data-product="{{ product.name }}"
+               data-price="{{ product.price }}">
               <i class="fas fa-shopping-cart"></i>
             </a>
           </div>
@@ -113,13 +105,58 @@
 
     <!-- View All Button -->
     <div class="text-center mt-12">
-      <a
-        href="{% url 'products' %}"
-        class="inline-flex items-center text-primary border border-primary px-8 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition"
-      >
+      <a href="{% url 'products' %}"
+         class="inline-flex items-center text-primary border border-primary px-8 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition">
         <span>View All Products</span>
-        <i class="fas fa-chevron-up ml-2"></i>
+        <i class="fas fa-chevron-right ml-2"></i>
       </a>
     </div>
   </div>
 </section>
+
+<!-- AJAX Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.wishlist-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const productId = this.getAttribute('data-product-id');
+            const icon = this.querySelector('i');
+
+            fetch(`/wishlist/toggle/${productId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'added') {
+                    icon.classList.remove('far', 'text-gray-500');
+                    icon.classList.add('fas', 'text-red-500');
+                } else if (data.status === 'removed') {
+                    icon.classList.remove('fas', 'text-red-500');
+                    icon.classList.add('far', 'text-gray-500');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+});
+
+// CSRF Token Helper
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>

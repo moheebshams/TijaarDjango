@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Desktop slider
 class Slide(models.Model):
     title = models.CharField(max_length=100, blank=True)
@@ -143,3 +144,16 @@ class Offer(models.Model):
 
     def __str__(self):
         return self.title
+
+# Wishlist
+from django.db import models
+from django.contrib.auth.models import User
+from core.models import FeaturedProduct  # Update this to your actual product model
+
+class WishItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(FeaturedProduct, on_delete=models.CASCADE)
+    quantity = models.SmallIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.product.name} (x{self.quantity})"

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from .models import*
 
 # Hero Section
 from .models import Slide
@@ -76,3 +77,11 @@ class OfferAdmin(admin.ModelAdmin):
     list_display = ('title', 'sale', 'discount', 'days', 'hours', 'minutes', 'start_time')
     search_fields = ('title', 'sale', 'discount', 'description')
     ordering = ('-id',)
+
+# Wishlist
+from .models import WishItem
+
+@admin.register(WishItem)
+class WishItemAdmin(admin.ModelAdmin):
+    list_display = ('user', 'product', 'quantity')
+    list_filter = ('user',)
