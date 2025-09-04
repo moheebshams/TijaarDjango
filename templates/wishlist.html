@@ -61,11 +61,11 @@
                 </span>
                 <div class="text-center mt-2 md:mt-4">
                     <span class="text-lg font-semibold text-gray-900">
-                        ${{ item.product.price }}
+                        {{ item.product.price }}
                     </span>
                     {% if item.product.old_price %}
                     <p class="text-sm text-gray-500 line-through">
-                        ${{ item.product.old_price }}
+                        {{ item.product.old_price }}
                     </p>
                     {% endif %}
                 </div>
